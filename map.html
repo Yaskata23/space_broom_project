@@ -19,15 +19,23 @@
 
     const viewer = new Cesium.Viewer('cesiumContainer');
 
+    viewer.imageryLayers.removeAll();
+    viewer.imageryLayers.addImageryProvider(new Cesium.UrlTemplateImageryProvider({
+      url: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8DwABAAAAPAAE8QAAAAR9B5lAAAADElEQVR42mP8/wf4DwAB/4ABoVUnsAAAAASUVORK5CYII=',
+    }));
+
     (async () => {
       try {
-        const resource = await Cesium.IonResource.fromAssetId(2304512);
+        const resource = await Cesium.IonResource.fromAssetId(2304540);
+
         const entity = viewer.entities.add({
-          position: Cesium.Cartesian3.fromDegrees(0, 0, 100),
+          position: Cesium.Cartesian3.fromDegrees(0, 0, 0),
           model: {
             uri: resource,
+            scale: 1000000.0,
           },
         });
+
         viewer.trackedEntity = entity;
       } catch (error) {
         console.log(error);
